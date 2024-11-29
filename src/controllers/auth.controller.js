@@ -170,13 +170,69 @@ export const verifyMailValidationTokenController = async (req, res) => {
       })
     );
   } catch (err) {
-    console.error(err.message);
+    res.status(500).json(
+      responseBuilder(false, 500, "SERVER_ERROR", {
+        location: "verifyMailValidationTokenController",
+        message: err.message,
+      })
+    );
   }
 };
 
-// PROTECT ROUTES CONTROLLER
-
 // FORGOT PASSWORD CONTROLLER
+export const forgotPasswordController = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(401).json(
+        responseBuilder(false, 400, "BAD_REQUEST", {
+          detail: "Email is required",
+        })
+      );
+    }
+
+    const user = await UserRepository.getByEmail(email);
+
+    if (!user) {
+      return res.status(401).json(
+        responseBuilder(false, 404, "UNAUTHORIZED", {
+          detail: "User not found",
+        })
+      );
+    }
+
+    const token = signToken({
+      email: user.email,
+      id: user._id,
+    });
+
+    const url = `${req.protocol}://${req.get(
+      "host"
+    )}/api/v1/auth/reset-password/${token}`;
+
+    const response = await new Email(
+      user.fullname,
+      user.email,
+      url
+    ).sendResetPasswordToken();
+
+    console.log(response);
+
+    return res.status(200).json(
+      responseBuilder(true, 200, "SUCCESS", {
+        message: "Recovery password email sent successfully",
+      })
+    );
+  } catch (err) {
+    res.status(500).json(
+      responseBuilder(false, 500, "SERVER_ERROR", {
+        location: "forgotPasswordController",
+        message: err.message,
+      })
+    );
+  }
+};
 
 // RESET PASSWORD CONTROLLER
 

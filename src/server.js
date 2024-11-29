@@ -3,8 +3,10 @@ import ENV from "./config/enviroment.config.js";
 // DB connection
 import mongoose from "./db/configDB.js";
 
-const url = `http://localhost:${ENV.PORT}` || "http://localhost:3000";
+const port = ENV.PORT || 3000;
 
-app.listen(ENV.PORT, () => {
+const url = `http://localhost:${port}` || "http://localhost:3000";
+
+app.listen(port, () => {
   console.log(`Server running on ${url} 🚀`);
 });

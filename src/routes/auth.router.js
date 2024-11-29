@@ -1,7 +1,8 @@
 import express from "express";
 import {
-  createUserController,
   loginController,
+  createUserController,
+  forgotPasswordController,
   verifyMailValidationTokenController,
 } from "../controllers/auth.controller.js";
 import { verifyApiKeyMiddleware } from "../middlewares/auth.middleware.js";
@@ -12,8 +13,10 @@ authRouter.get(
   "/verify/:verification_token",
   verifyMailValidationTokenController
 );
+
 authRouter.use(verifyApiKeyMiddleware);
-authRouter.post("/signup", createUserController);
 authRouter.post("/login", loginController);
+authRouter.post("/signup", createUserController);
+authRouter.post("/forgot-password", forgotPasswordController);
 
 export default authRouter;
