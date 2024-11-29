@@ -9,12 +9,12 @@ import { verifyApiKeyMiddleware } from "../middlewares/auth.middleware.js";
 
 const authRouter = express.Router();
 
+authRouter.use(verifyApiKeyMiddleware);
+
 authRouter.get(
   "/verify/:verification_token",
   verifyMailValidationTokenController
 );
-
-authRouter.use(verifyApiKeyMiddleware);
 authRouter.post("/login", loginController);
 authRouter.post("/signup", createUserController);
 authRouter.post("/forgot-password", forgotPasswordController);

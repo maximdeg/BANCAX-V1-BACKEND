@@ -12,6 +12,7 @@ const ENV = {
   GMAIL_PASS: process.env.GMAIL_PASS,
   GMAIL_USER: process.env.GMAIL_USER,
   URL_BACKEND: process.env.URL_BACKEND,
+  URL_FRONTEND: process.env.URL_FRONTEND,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
   INTERNAL_API_KEY: process.env.INTERNAL_API_KEY,
   JWT_COOKIE_EXPIRES_IN: process.env.JWT_COOKIE_EXPIRES_IN,

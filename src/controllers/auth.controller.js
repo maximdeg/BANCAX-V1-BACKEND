@@ -36,9 +36,7 @@ export const createUserController = async (req, res, next) => {
       verification_token: verificationToken,
     };
 
-    const url = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/auth/verify/${verificationToken}`;
+    const url = `${ENV.URL_FRONTEND}/in/verify/${verificationToken}`;
 
     await new Email(fullname, email, url).sendVerificationToken();
 
@@ -150,8 +148,9 @@ export const verifyMailValidationTokenController = async (req, res) => {
 
     const decodedUser = jwt.verify(verification_token, ENV.JWT_SECRET);
 
-    console.log(decodedUser.email);
     const user = await UserRepository.getByEmail(decodedUser.email);
+
+    console.log(user);
 
     if (!user) throw new Error("USER NOT FOUND");
 
@@ -207,9 +206,7 @@ export const forgotPasswordController = async (req, res) => {
       id: user._id,
     });
 
-    const url = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/auth/reset-password/${token}`;
+    const url = `${ENV.URL_FRONTEND}/in/reset-password/${token}`;
 
     const response = await new Email(
       user.fullname,
@@ -239,3 +236,26 @@ export const forgotPasswordController = async (req, res) => {
 // UPDATE PASSWORD CONTROLLER
 
 // LOGOUT CONTROLLER
+
+// {
+//   accepted: [ 'maxim.degtiarev.dev@gmail.com' ],
+//   rejected: [],
+//   ehlo: [
+//     'SIZE 35882577',
+//     '8BITMIME',
+//     'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+//     'ENHANCEDSTATUSCODES',
+//     'PIPELINING',
+//     'CHUNKING',
+//     'SMTPUTF8'
+//   ],
+//   envelopeTime: 723,
+//   messageTime: 909,
+//   messageSize: 77208,
+//   response: '250 2.0.0 OK  1732892059 41be03b00d2f7-7fc9c388ea6sm3182922a12.57 - gsmtp',
+//   envelope: {
+//     from: 'maxim.degtiarev.dev@gmail.com',
+//     to: [ 'maxim.degtiarev.dev@gmail.com' ]
+//   },
+//   messageId: '<f7ea92ba-27c7-8d5a-3d63-9abfb97ecc2d@gmail.com>'
+// }
