@@ -13,7 +13,7 @@ const transactionRouter = express.Router();
 transactionRouter.use(verifyApiKeyMiddleware);
 transactionRouter.use(verifyTokenMiddleware("user"));
 
-transactionRouter.post("/", createTransactionController);
+transactionRouter.post("/:user_id", createTransactionController);
 transactionRouter.get("/:user_id", getAllTransactionsController);
 
 export default transactionRouter;

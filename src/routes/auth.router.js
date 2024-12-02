@@ -2,6 +2,7 @@ import express from "express";
 import {
   loginController,
   createUserController,
+  resetPasswordController,
   forgotPasswordController,
   verifyMailValidationTokenController,
 } from "../controllers/auth.controller.js";
@@ -17,6 +18,7 @@ authRouter.get(
 );
 authRouter.post("/login", loginController);
 authRouter.post("/signup", createUserController);
-authRouter.post("/forgot-password", forgotPasswordController);
+authRouter.put("/reset-password/:token", resetPasswordController);
+authRouter.put("/forgot-password", forgotPasswordController);
 
 export default authRouter;

@@ -192,6 +192,7 @@ export const forgotPasswordController = async (req, res) => {
     }
 
     const user = await UserRepository.getByEmail(email);
+    console.dir(user);
 
     if (!user) {
       return res.status(401).json(
@@ -232,6 +233,63 @@ export const forgotPasswordController = async (req, res) => {
 };
 
 // RESET PASSWORD CONTROLLER
+export const resetPasswordController = async (req, res) => {
+  try {
+    const { password, password_confirm } = req.body.data;
+    const { token } = req.params;
+
+    if (!password || !password_confirm) {
+      return res.status(401).json(
+        responseBuilder(false, 400, "BAD_REQUEST", {
+          detail: "Password and password confirm are required",
+        })
+      );
+    }
+
+    if (password !== password_confirm) {
+      return res.status(401).json(
+        responseBuilder(false, 400, "BAD_REQUEST", {
+          detail: "Passwords do not match",
+        })
+      );
+    }
+
+    const decodedUser = jwt.verify(token, ENV.JWT_SECRET);
+
+    const user = await UserRepository.getByEmail(decodedUser.email);
+
+    if (!user) {
+      return res.status(401).json(
+        responseBuilder(false, 404, "UNAUTHORIZED", {
+          detail: "User not found",
+        })
+      );
+    }
+
+    const hashed_password = await bcrypt.hash(password, 10);
+
+    user.password = hashed_password;
+    user.password_confirm = hashed_password;
+    user.updated_at = Date.now();
+    user.password_changed_at = Date.now();
+
+    await user.save();
+
+    return res.status(200).json(
+      responseBuilder(true, 200, "SUCCESS", {
+        message: "Password updated successfully",
+        detail: user,
+      })
+    );
+  } catch (err) {
+    res.status(500).json(
+      responseBuilder(false, 500, "SERVER_ERROR", {
+        location: "resetPasswordController",
+        message: err.message,
+      })
+    );
+  }
+};
 
 // UPDATE PASSWORD CONTROLLER
 
