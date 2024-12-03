@@ -26,7 +26,17 @@ export const updateUserByIdController = async (req, res) => {
 
     return res.status(200).json(
       responseBuilder(true, 200, "User updated successfully", {
-        detail: user,
+        detail: {
+          user: {
+            id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            photo: user.photo,
+            categories: user.categories,
+            sources: user.sources,
+            role: user.role,
+          },
+        },
       })
     );
   } catch (err) {

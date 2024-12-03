@@ -22,12 +22,13 @@ export const getAllTransactionsController = async (req, res) => {
 
 export const createTransactionController = async (req, res) => {
   try {
-    const { amount, source, category, description } = req.body;
+    const { amount, source, category, description, date } = req.body;
     const { user_id } = req.params;
 
     const transaction = await TransactionRepository.saveTransaction({
       user_id,
       amount,
+      date,
       source,
       category,
       description,

@@ -15,6 +15,6 @@ userRouter.use(verifyApiKeyMiddleware);
 userRouter.use(verifyTokenMiddleware("user"));
 
 userRouter.get("/", getAllUsersController);
-userRouter.put("/:user_id", addSourceController);
+userRouter.put("/:user_id", updateUserByIdController);
 
 export default userRouter;
