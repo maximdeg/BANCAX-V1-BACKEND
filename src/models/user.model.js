@@ -4,6 +4,7 @@ import validator from "validator";
 const sourceSchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
     required: [true, "Please provide a source name."],
   },
   color: {
@@ -18,6 +19,7 @@ const sourceSchema = new mongoose.Schema({
 const categorySchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
     required: [true, "Please provide a category name."],
   },
   color: {
@@ -91,17 +93,6 @@ const userSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
-
-// userSchema.pre(/^find/, function (next) {
-//   this.start = Date.now();
-//   next();
-// });
-
-// Duration of post actions on mongoose
-// userSchema.post(/^find/, function (docs, next) {
-//   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-//   next();
-// });
 
 const User = mongoose.model("User", userSchema);
 
