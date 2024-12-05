@@ -80,12 +80,17 @@ export const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        if (!email || !password)
+            return res.status(400).json(responseBuilder(false, 400, "BAD_REQUEST", { message: "Email and password are required" }));
+
         const user = await UserRepository.getByEmail(email);
 
-        if (!user) {
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword || !user) {
             return res.status(401).json(
-                responseBuilder(false, 401, "UNAUTHORIZED", {
-                    detail: "User does not exist. Please register to continue.",
+                responseBuilder(false, 401, "INVALID_PASSWORD", {
+                    detail: "User not found or password is incorrect",
                 })
             );
         }
@@ -93,17 +98,7 @@ export const loginController = async (req, res) => {
         if (!user.email_verified) {
             return res.status(401).json(
                 responseBuilder(false, 401, "UNAUTHORIZED", {
-                    detail: "User is not verified. Please check your email, including the spam folder, to verify your email.",
-                })
-            );
-        }
-
-        const isValidPassword = await bcrypt.compare(password, user.password);
-
-        if (!isValidPassword) {
-            return res.status(401).json(
-                responseBuilder(false, 401, "INVALID_PASSWORD", {
-                    detail: "The password is not correct",
+                    detail: "User not verified",
                 })
             );
         }
@@ -155,13 +150,20 @@ export const verifyMailValidationTokenController = async (req, res) => {
 
         const user = await UserRepository.getByEmail(decodedUser.email);
 
-        console.log(user);
+        if (!user)
+            return res.status(404).json(
+                responseBuilder(true, 404, "NOT_FOUND", {
+                    message: "User not found",
+                })
+            );
 
-        if (!user) throw new Error("USER NOT FOUND");
-
-        // if (user.emailVerified) {
-        //   // verification logic
-        // }
+        if (user.email_verified) {
+            return res.status(200).json(
+                responseBuilder(false, 400, "BAD_REQUEST", {
+                    detail: "User already verified",
+                })
+            );
+        }
 
         user.email_verified = true;
 
@@ -216,7 +218,8 @@ export const forgotPasswordController = async (req, res) => {
 
         const response = await new Email(user.fullname, user.email, url).sendResetPasswordToken();
 
-        console.log(response);
+        if (!response.response.split(" ")[2] === "OK")
+            return res.status(500).json(responseBuilder(false, 500, "SERVER_ERROR", { message: "Error to send email" }));
 
         return res.status(200).json(
             responseBuilder(true, 200, "SUCCESS", {
@@ -291,30 +294,3 @@ export const resetPasswordController = async (req, res) => {
         );
     }
 };
-
-// UPDATE PASSWORD CONTROLLER
-
-// LOGOUT CONTROLLER
-
-// {
-//   accepted: [ 'maxim.degtiarev.dev@gmail.com' ],
-//   rejected: [],
-//   ehlo: [
-//     'SIZE 35882577',
-//     '8BITMIME',
-//     'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
-//     'ENHANCEDSTATUSCODES',
-//     'PIPELINING',
-//     'CHUNKING',
-//     'SMTPUTF8'
-//   ],
-//   envelopeTime: 723,
-//   messageTime: 909,
-//   messageSize: 77208,
-//   response: '250 2.0.0 OK  1732892059 41be03b00d2f7-7fc9c388ea6sm3182922a12.57 - gsmtp',
-//   envelope: {
-//     from: 'maxim.degtiarev.dev@gmail.com',
-//     to: [ 'maxim.degtiarev.dev@gmail.com' ]
-//   },
-//   messageId: '<f7ea92ba-27c7-8d5a-3d63-9abfb97ecc2d@gmail.com>'
-// }

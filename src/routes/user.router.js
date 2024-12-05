@@ -1,13 +1,6 @@
 import express from "express";
-import {
-  addSourceController,
-  getAllUsersController,
-  updateUserByIdController,
-} from "../controllers/user.controller.js";
-import {
-  verifyApiKeyMiddleware,
-  verifyTokenMiddleware,
-} from "../middlewares/auth.middleware.js";
+import { getAllUsersController, updateUserByIdController } from "../controllers/user.controller.js";
+import { verifyApiKeyMiddleware, verifyTokenMiddleware } from "../middlewares/auth.middleware.js";
 
 const userRouter = express.Router();
 

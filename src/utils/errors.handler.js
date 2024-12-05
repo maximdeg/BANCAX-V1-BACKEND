@@ -21,6 +21,15 @@ export const validateCreateUser = (fields) => {
         };
     }
 
+    if (!/^[a-zA-Z\s]*$/.test(fullname)) {
+        return {
+            status_code: 400,
+            response_errors: responseBuilder(false, 400, "BAD_REQUEST", {
+                message: "No numbers allowed in fullname",
+            }),
+        };
+    }
+
     if (!email) {
         return {
             status_code: 400,
