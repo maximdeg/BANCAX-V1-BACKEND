@@ -1,5 +1,5 @@
 const welcomeTokenHTML = (url, userName) => {
-  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:v="urn:schemas-microsoft-com:vml"
@@ -112,7 +112,7 @@ const welcomeTokenHTML = (url, userName) => {
 
       table,
       td {
-        color: #000000;
+        color: #1A1D1D;
       }
       #u_body a {
         color: #0000ee;
@@ -229,7 +229,7 @@ const welcomeTokenHTML = (url, userName) => {
       padding: 0;
       -webkit-text-size-adjust: 100%;
       background-color: #e7e7e7;
-      color: #000000;
+      color: #1A1D1D;
     "
   >
     <!--[if IE]><div class="ie-container"><![endif]-->
@@ -240,8 +240,8 @@ const welcomeTokenHTML = (url, userName) => {
         border-collapse: collapse;
         table-layout: fixed;
         border-spacing: 0;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
+        
+  
         vertical-align: top;
         min-width: 320px;
         margin: 0 auto;
@@ -326,8 +326,9 @@ const welcomeTokenHTML = (url, userName) => {
                                 style="
                                   overflow-wrap: break-word;
                                   word-break: break-word;
-                                  padding: 20px 10px 0px;
+                                  padding: 10px 10px 10px;
                                   font-family: Merriweather Sans, sans-serif;
+                                  background-color: #1A1D1D;
                                 "
                                 align="left"
                               >
@@ -346,11 +347,16 @@ const welcomeTokenHTML = (url, userName) => {
                                       "
                                       align="center"
                                     >
+                                    <a
+                                              href="https://bancax.vercel.com"
+                                              title="Github"
+                                              target="_blank"
+                                            >
                                       <img
                                         align="center"
                                         border="0"
-                                        src="/images/image-1.png"
-                                        alt="Logo"
+                                        src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/small-logo_f0jlfh.png" 
+                                        alt="logo"                                 
                                         title="Logo"
                                         style="
                                           outline: none;
@@ -362,10 +368,13 @@ const welcomeTokenHTML = (url, userName) => {
                                           height: auto;
                                           float: none;
                                           width: 100%;
-                                          max-width: 200px;
+                                          max-width: 150px;
+                                          /* margin-bottom: 30px; */
+                                          background-color: transparent;
                                         "
-                                        width="200"
+                                        width="150"
                                       />
+                                  </a>
                                     </td>
                                   </tr>
                                 </table>
@@ -466,7 +475,7 @@ const welcomeTokenHTML = (url, userName) => {
                   overflow-wrap: break-word;
                   word-wrap: break-word;
                   word-break: break-word;
-                  background-color: #0e0e0a;
+                  background-color: #1A1D1D;
                 "
               >
                 <div
@@ -475,13 +484,12 @@ const welcomeTokenHTML = (url, userName) => {
                     display: table;
                     width: 100%;
                     height: 100%;
-                    background-image: url('/images/image-13.png');
                     background-repeat: no-repeat;
                     background-position: center top;
                     background-color: transparent;
                   "
                 >
-                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-image: url('/images/image-13.png');background-repeat: no-repeat;background-position: center top;background-color: #0e0e0a;"><![endif]-->
+                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-image: url('/images/image-13.png');background-repeat: no-repeat;background-position: center top;background-color: #1A1D1D;"><![endif]-->
 
                   <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
                   <div
@@ -520,8 +528,9 @@ const welcomeTokenHTML = (url, userName) => {
                                 style="
                                   overflow-wrap: break-word;
                                   word-break: break-word;
-                                  padding: 55px 10px 10px;
+                                  padding: 20px 10px 10px;
                                   font-family: Merriweather Sans, sans-serif;
+                                  border-top: 1px solid rgba(81, 81, 81, 0.552);
                                 "
                                 align="left"
                               >
@@ -709,7 +718,7 @@ const welcomeTokenHTML = (url, userName) => {
                                       overflow-wrap: break-word;
                                       word-break: break-word;
                                       word-wrap: break-word;
-                                      mso-border-alt: none;
+                                      
                                       font-size: 14px;
                                     "
                                   >
@@ -884,10 +893,7 @@ const welcomeTokenHTML = (url, userName) => {
                                         line-height: 27.2px;
                                         font-family: Raleway, sans-serif;
                                       "
-                                      >Lorem ipsum dolor sit amet, consectetur
-                                      adipiscing elit, sed do eiusmod tempor
-                                      incididunt ut labore et dolore magna
-                                      aliqua.
+                                      >Bancax is an app that allows you to manage your finances in a simple and easy way. Start using it now!
                                     </span>
                                   </p>
                                 </div>
@@ -1019,8 +1025,7 @@ const welcomeTokenHTML = (url, userName) => {
                                   "
                                 >
                                   <p style="font-size: 14px; line-height: 140%">
-                                    Lorem ipsum dolor sit amet, cg elit. Aenean
-                                    dictum mi non fermentum porta.
+                                    Check our social media to stay tuned with our updates!!
                                   </p>
                                 </div>
                               </td>
@@ -1050,7 +1055,7 @@ const welcomeTokenHTML = (url, userName) => {
                               >
                                 <div align="center" style="direction: ltr">
                                   <div style="display: table; max-width: 167px">
-                                    <!--[if (mso)|(IE)]><table width="167" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-collapse:collapse;" align="center"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace: 0pt;mso-table-rspace: 0pt; width:167px;"><tr><![endif]-->
+                                    <!--[if (mso)|(IE)]><table width="167" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-collapse:collapse;" align="center"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace: 0 width:167px;"><tr><![endif]-->
 
                                     <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 10px;" valign="top"><![endif]-->
                                     <table
@@ -1066,8 +1071,8 @@ const welcomeTokenHTML = (url, userName) => {
                                         border-collapse: collapse;
                                         table-layout: fixed;
                                         border-spacing: 0;
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
+                                        
+                                  
                                         vertical-align: top;
                                         margin-right: 10px;
                                       "
@@ -1083,14 +1088,14 @@ const welcomeTokenHTML = (url, userName) => {
                                             "
                                           >
                                             <a
-                                              href="https://facebook.com/"
-                                              title="Facebook"
+                                              href="https://github.com/maximdeg"
+                                              title="Github"
                                               target="_blank"
                                             >
                                               <img
-                                                src="/images/image-9.png"
-                                                alt="Facebook"
-                                                title="Facebook"
+                                                src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734111845/github-logo_cy33sg.png"
+                                                alt="Github"
+                                                title="Github"
                                                 width="32"
                                                 style="
                                                   outline: none;
@@ -1102,6 +1107,8 @@ const welcomeTokenHTML = (url, userName) => {
                                                   height: auto;
                                                   float: none;
                                                   max-width: 32px !important;
+                                                  border-radius: 50%;
+
                                                 "
                                               />
                                             </a>
@@ -1125,8 +1132,8 @@ const welcomeTokenHTML = (url, userName) => {
                                         border-collapse: collapse;
                                         table-layout: fixed;
                                         border-spacing: 0;
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
+                                        
+                                  
                                         vertical-align: top;
                                         margin-right: 10px;
                                       "
@@ -1142,12 +1149,12 @@ const welcomeTokenHTML = (url, userName) => {
                                             "
                                           >
                                             <a
-                                              href="https://linkedin.com/"
+                                              href="https://linkedin.com/in/maxin-degtiarev"
                                               title="LinkedIn"
                                               target="_blank"
                                             >
                                               <img
-                                                src="/images/image-10.png"
+                                                src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734111395/image-10_hvmuhb.png"
                                                 alt="LinkedIn"
                                                 title="LinkedIn"
                                                 width="32"
@@ -1161,9 +1168,11 @@ const welcomeTokenHTML = (url, userName) => {
                                                   height: auto;
                                                   float: none;
                                                   max-width: 32px !important;
+                                                  border-radius: 50%;
+
                                                 "
                                               />
-                                            </a>
+                                            </aa>
                                           </td>
                                         </tr>
                                       </tbody>
@@ -1184,8 +1193,8 @@ const welcomeTokenHTML = (url, userName) => {
                                         border-collapse: collapse;
                                         table-layout: fixed;
                                         border-spacing: 0;
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
+                                        
+                                  
                                         vertical-align: top;
                                         margin-right: 10px;
                                       "
@@ -1201,12 +1210,12 @@ const welcomeTokenHTML = (url, userName) => {
                                             "
                                           >
                                             <a
-                                              href="https://twitter.com/"
+                                              href="https://x.com/"
                                               title="Twitter"
                                               target="_blank"
                                             >
                                               <img
-                                                src="/images/image-11.png"
+                                                src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734111845/x-logo_g1nj6q.png"
                                                 alt="Twitter"
                                                 title="Twitter"
                                                 width="32"
@@ -1220,6 +1229,7 @@ const welcomeTokenHTML = (url, userName) => {
                                                   height: auto;
                                                   float: none;
                                                   max-width: 32px !important;
+                                                  border-radius: 50%;
                                                 "
                                               />
                                             </a>
@@ -1243,8 +1253,8 @@ const welcomeTokenHTML = (url, userName) => {
                                         border-collapse: collapse;
                                         table-layout: fixed;
                                         border-spacing: 0;
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
+                                        
+                                  
                                         vertical-align: top;
                                         margin-right: 0px;
                                       "
@@ -1260,14 +1270,14 @@ const welcomeTokenHTML = (url, userName) => {
                                             "
                                           >
                                             <a
-                                              href="https://instagram.com/"
-                                              title="Instagram"
+                                              href="https://Discord.com/"
+                                              title="Discord"
                                               target="_blank"
                                             >
                                               <img
-                                                src="/images/image-12.png"
-                                                alt="Instagram"
-                                                title="Instagram"
+                                                src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734111844/discord-logo_pw7jcz.png"
+                                                alt="Discord"
+                                                title="Discord"
                                                 width="32"
                                                 style="
                                                   outline: none;
@@ -1279,6 +1289,7 @@ const welcomeTokenHTML = (url, userName) => {
                                                   height: auto;
                                                   float: none;
                                                   max-width: 32px !important;
+                                                  border-radius: 50%;
                                                 "
                                               />
                                             </a>
@@ -1327,8 +1338,8 @@ const welcomeTokenHTML = (url, userName) => {
                                     border-collapse: collapse;
                                     table-layout: fixed;
                                     border-spacing: 0;
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
+                                    
+                              
                                     vertical-align: top;
                                     border-top: 1px solid #888888;
                                     -ms-text-size-adjust: 100%;
@@ -1344,7 +1355,7 @@ const welcomeTokenHTML = (url, userName) => {
                                           vertical-align: top;
                                           font-size: 0px;
                                           line-height: 0px;
-                                          mso-line-height-rule: exactly;
+                                          
                                           -ms-text-size-adjust: 100%;
                                           -webkit-text-size-adjust: 100%;
                                         "
@@ -1390,7 +1401,7 @@ const welcomeTokenHTML = (url, userName) => {
                                   "
                                 >
                                   <p style="font-size: 14px; line-height: 140%">
-                                    &copy; 20XX Company. All Rights Reserved.
+                                    &copy; 2024 Maxim Degtiarev. Mostly for personal and portfolio use.
                                   </p>
                                 </div>
                               </td>
@@ -1489,8 +1500,8 @@ const welcomeTokenHTML = (url, userName) => {
                                     border-collapse: collapse;
                                     table-layout: fixed;
                                     border-spacing: 0;
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
+                                    
+                              
                                     vertical-align: top;
                                     border-top: 0px solid #bbbbbb;
                                     -ms-text-size-adjust: 100%;
@@ -1506,7 +1517,7 @@ const welcomeTokenHTML = (url, userName) => {
                                           vertical-align: top;
                                           font-size: 0px;
                                           line-height: 0px;
-                                          mso-line-height-rule: exactly;
+                                          
                                           -ms-text-size-adjust: 100%;
                                           -webkit-text-size-adjust: 100%;
                                         "

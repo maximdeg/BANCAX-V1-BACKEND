@@ -1,5 +1,4 @@
-const resetPasswordTokenHTML = (url, userName) => {
-    return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:v="urn:schemas-microsoft-com:vml"
@@ -652,9 +651,11 @@ const resetPasswordTokenHTML = (url, userName) => {
                                 <p style="font-size: 14px; line-height: 180%" color:#15b6fb>
                                   <strong
                                     >${userName
-                                        .toUpperCase()
-                                        .split("")
-                                        .join(" ")},&nbsp; &nbsp;T O&nbsp; &nbsp;R E S E T&nbsp; &nbsp;Y O U R&nbsp; &nbsp;P A S S W O R D</strong
+                                      .toUpperCase()
+                                      .split("")
+                                      .join(
+                                        " "
+                                      )},&nbsp; &nbsp;T O&nbsp; &nbsp;R E S E T&nbsp; &nbsp;Y O U R&nbsp; &nbsp;P A S S W O R D</strong
                                   >
                                 </p>
                                 <p style="font-size: 14px; line-height: 180%">
@@ -1553,7 +1554,3 @@ const resetPasswordTokenHTML = (url, userName) => {
     <!--[if IE]></div><![endif]-->
   </body>
 </html>
-  `;
-};
-
-export default resetPasswordTokenHTML;
