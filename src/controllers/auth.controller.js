@@ -58,14 +58,14 @@ export const createUserController = async (req, res, next) => {
     } catch (err) {
         if (err.code === 11000) {
             res.status(409).json(
-                responseBuilder(true, 409, "DATABASE_ERROR", {
+                responseBuilder(false, 409, "DATABASE_ERROR", {
                     location: "createUserController",
                     message: "This email already registered",
                 })
             );
         } else {
             res.status(500).json(
-                responseBuilder(true, 500, "SERVER_ERROR", {
+                responseBuilder(false, 500, "SERVER_ERROR", {
                     location: "createUserController",
                     message: err.message,
                 })
