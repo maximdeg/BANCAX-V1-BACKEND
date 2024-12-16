@@ -83,6 +83,8 @@ export const loginController = async (req, res) => {
         if (!email || !password)
             return res.status(400).json(responseBuilder(false, 400, "BAD_REQUEST", { detail: "Email and password are required" }));
 
+        console.dir(password);
+
         const user = await UserRepository.getByEmail(email);
 
         const isValidPassword = await bcrypt.compare(password, user.password);
