@@ -43,7 +43,7 @@ export const createUserController = async (req, res, next) => {
             return res.status(500).json(
                 responseBuilder(false, 500, "SERVER_ERROR", {
                     location: "createUserController",
-                    message: "Failed to save user",
+                    detail: "Failed to save user",
                 })
             );
         }
@@ -60,14 +60,14 @@ export const createUserController = async (req, res, next) => {
             res.status(409).json(
                 responseBuilder(false, 409, "DATABASE_ERROR", {
                     location: "createUserController",
-                    message: "This email already registered",
+                    detail: "This email already registered",
                 })
             );
         } else {
             res.status(500).json(
                 responseBuilder(false, 500, "SERVER_ERROR", {
                     location: "createUserController",
-                    message: err.message,
+                    detail: err.message,
                 })
             );
         }
@@ -81,7 +81,7 @@ export const loginController = async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password)
-            return res.status(400).json(responseBuilder(false, 400, "BAD_REQUEST", { message: "Email and password are required" }));
+            return res.status(400).json(responseBuilder(false, 400, "BAD_REQUEST", { detail: "Email and password are required" }));
 
         const user = await UserRepository.getByEmail(email);
 
@@ -127,7 +127,7 @@ export const loginController = async (req, res) => {
         res.status(500).json(
             responseBuilder(false, 500, "SERVER_ERROR", {
                 location: "loginController",
-                message: err.message,
+                detail: err.message,
             })
         );
     }
@@ -153,7 +153,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
         if (!user)
             return res.status(404).json(
                 responseBuilder(true, 404, "NOT_FOUND", {
-                    message: "User not found",
+                    detail: "User not found",
                 })
             );
 
@@ -179,7 +179,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
         res.status(500).json(
             responseBuilder(false, 500, "SERVER_ERROR", {
                 location: "verifyMailValidationTokenController",
-                message: err.message,
+                detail: err.message,
             })
         );
     }
@@ -219,18 +219,18 @@ export const forgotPasswordController = async (req, res) => {
         const response = await new Email(user.fullname, user.email, url).sendResetPasswordToken();
 
         if (!response.response.split(" ")[2] === "OK")
-            return res.status(500).json(responseBuilder(false, 500, "SERVER_ERROR", { message: "Error to send email" }));
+            return res.status(500).json(responseBuilder(false, 500, "SERVER_ERROR", { detail: "Error to send email" }));
 
         return res.status(200).json(
             responseBuilder(true, 200, "SUCCESS", {
-                message: "Recovery password email sent successfully",
+                detail: "Recovery password email sent successfully",
             })
         );
     } catch (err) {
         res.status(500).json(
             responseBuilder(false, 500, "SERVER_ERROR", {
                 location: "forgotPasswordController",
-                message: err.message,
+                detail: err.message,
             })
         );
     }
@@ -289,7 +289,7 @@ export const resetPasswordController = async (req, res) => {
         res.status(500).json(
             responseBuilder(false, 500, "SERVER_ERROR", {
                 location: "resetPasswordController",
-                message: err.message,
+                detail: err.message,
             })
         );
     }

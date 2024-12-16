@@ -42,14 +42,14 @@ export const getAllTransactionsController = async (req, res) => {
             return res.status(401).json(
                 responseBuilder(false, 401, "UNAUTHORIZED", {
                     location: "getAllTransactionController",
-                    message: "Id not valid",
+                    detail: "Id not valid",
                 })
             );
         } else {
             return res.status(500).json(
                 responseBuilder(false, 500, "SERVER_ERROR", {
                     location: "getAllTransactionController",
-                    message: err.message,
+                    detail: err.message,
                 })
             );
         }
@@ -79,7 +79,7 @@ export const createTransactionController = async (req, res) => {
         res.status(500).json(
             responseBuilder(false, 500, "SERVER_ERROR", {
                 location: "createTransactionController",
-                message: err.message,
+                detail: err.message,
             })
         );
     }
