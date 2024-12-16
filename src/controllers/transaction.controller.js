@@ -26,8 +26,6 @@ export const getAllTransactionsController = async (req, res) => {
 
         const transactions = await TransactionRepository.getAllTransactionsByUserId(user_id);
 
-        console.log("TRANSACTIONS", transactions);
-
         if (!transactions) {
             return res.status(404).json(
                 responseBuilder(false, 404, "NOT_FOUND", {

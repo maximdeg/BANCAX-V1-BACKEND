@@ -39,7 +39,6 @@ class Email {
 
             let response = await transporter.sendMail(options);
 
-            console.log(response);
             return response;
         } catch (error) {
             console.error("Error al enviar mail:", error);
