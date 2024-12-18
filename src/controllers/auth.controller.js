@@ -306,7 +306,7 @@ export const resetPasswordController = async (req, res) => {
 export const changePasswordController = async (req, res) => {
     try {
         const { user_id } = req.params;
-        const { password } = req.body;
+        const { password, password_confirm } = req.body;
 
         if (!user_id) {
             return res.status(400).json(
@@ -324,6 +324,24 @@ export const changePasswordController = async (req, res) => {
                 responseBuilder(false, 404, "NOT_FOUND", {
                     location: "changePasswordController",
                     detail: "User not found",
+                })
+            );
+        }
+
+        if (!password || !password_confirm) {
+            return res.status(400).json(
+                responseBuilder(false, 400, "BAD_REQUEST", {
+                    location: "changePasswordController",
+                    detail: "Password and password confirm are required",
+                })
+            );
+        }
+
+        if (password !== password_confirm) {
+            return res.status(400).json(
+                responseBuilder(false, 400, "BAD_REQUEST", {
+                    location: "changePasswordController",
+                    detail: "Passwords do not match",
                 })
             );
         }
