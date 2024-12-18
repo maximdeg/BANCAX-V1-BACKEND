@@ -49,6 +49,8 @@ export const updateUserByIdController = async (req, res) => {
             );
         }
 
+        user.updated_at = Date.now();
+
         return res.status(200).json(
             responseBuilder(true, 200, "User updated successfully", {
                 detail: {

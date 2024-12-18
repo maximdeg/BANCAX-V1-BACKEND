@@ -302,3 +302,53 @@ export const resetPasswordController = async (req, res) => {
         );
     }
 };
+
+export const changePasswordController = async (req, res) => {
+    try {
+        const { user_id } = req.params;
+        const { password } = req.body;
+
+        if (!user_id) {
+            return res.status(400).json(
+                responseBuilder(false, 400, "BAD_REQUEST", {
+                    location: "changePasswordController",
+                    detail: "User id is required",
+                })
+            );
+        }
+
+        const user = await UserRepository.getById(user_id);
+
+        if (!user) {
+            return res.status(404).json(
+                responseBuilder(false, 404, "NOT_FOUND", {
+                    location: "changePasswordController",
+                    detail: "User not found",
+                })
+            );
+        }
+
+        const hashed_new_password = await bcrypt.hash(password, 10);
+
+        user.password = hashed_new_password;
+        user.password_confirm = hashed_new_password;
+        user.updated_at = Date.now();
+        user.password_changed_at = Date.now();
+
+        await user.save();
+
+        return res.status(200).json(
+            responseBuilder(true, 200, "SUCCESS", {
+                message: "Password updated successfully",
+                detail: user,
+            })
+        );
+    } catch (err) {
+        return res.status(500).json(
+            responseBuilder(false, 500, "BAD_REQUEST", {
+                location: "changePasswordController",
+                detail: err.message,
+            })
+        );
+    }
+};
