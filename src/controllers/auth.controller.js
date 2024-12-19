@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import ENV from "../config/enviroment.config.js";
 import Email from "../utils/email.js";
-import { responseBuilder } from "../utils/builders/responseBuilder.js";
+import ENV from "../config/enviroment.config.js";
 import { validateCreateUser } from "../utils/errors.handler.js";
 import UserRepository from "../repositories/user.repository.js";
+import { responseBuilder } from "../utils/builders/responseBuilder.js";
+import { userNotFound, serverError } from "../utils/serverResponses.js";
 
 const signToken = (id) => {
     return jwt.sign(id, ENV.JWT_SECRET, {
@@ -64,12 +65,7 @@ export const createUserController = async (req, res, next) => {
                 })
             );
         } else {
-            res.status(500).json(
-                responseBuilder(false, 500, "SERVER_ERROR", {
-                    location: "createUserController",
-                    detail: err.message,
-                })
-            );
+            serverError(res, "createUserController", err.message);
         }
         return next(err);
     }
@@ -133,12 +129,7 @@ export const loginController = async (req, res) => {
             })
         );
     } catch (err) {
-        res.status(500).json(
-            responseBuilder(false, 500, "SERVER_ERROR", {
-                location: "loginController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "loginController", err.message);
     }
 };
 
@@ -159,12 +150,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
 
         const user = await UserRepository.getByEmail(decodedUser.email);
 
-        if (!user)
-            return res.status(404).json(
-                responseBuilder(true, 404, "NOT_FOUND", {
-                    detail: "User not found",
-                })
-            );
+        if (!user) return userNotFound(res, "verifyMailValidationTokenController");
 
         if (user.email_verified) {
             return res.status(200).json(
@@ -185,12 +171,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
             })
         );
     } catch (err) {
-        res.status(500).json(
-            responseBuilder(false, 500, "SERVER_ERROR", {
-                location: "verifyMailValidationTokenController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "verifyMailValidationTokenController", err.message);
     }
 };
 
@@ -211,11 +192,7 @@ export const forgotPasswordController = async (req, res) => {
         console.dir(user);
 
         if (!user) {
-            return res.status(401).json(
-                responseBuilder(false, 404, "UNAUTHORIZED", {
-                    detail: "User not found",
-                })
-            );
+            return userNotFound(res, "forgotPasswordController");
         }
 
         const token = signToken({
@@ -236,12 +213,7 @@ export const forgotPasswordController = async (req, res) => {
             })
         );
     } catch (err) {
-        res.status(500).json(
-            responseBuilder(false, 500, "SERVER_ERROR", {
-                location: "forgotPasswordController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "forgotPasswordController", err.message);
     }
 };
 
@@ -272,11 +244,7 @@ export const resetPasswordController = async (req, res) => {
         const user = await UserRepository.getByEmail(decodedUser.email);
 
         if (!user) {
-            return res.status(401).json(
-                responseBuilder(false, 404, "UNAUTHORIZED", {
-                    detail: "User not found",
-                })
-            );
+            return userNotFound(res, "resetPasswordController");
         }
 
         const hashed_password = await bcrypt.hash(password, 10);
@@ -295,12 +263,7 @@ export const resetPasswordController = async (req, res) => {
             })
         );
     } catch (err) {
-        res.status(500).json(
-            responseBuilder(false, 500, "SERVER_ERROR", {
-                location: "resetPasswordController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "resetPasswordController", err.message);
     }
 };
 
@@ -321,12 +284,7 @@ export const changePasswordController = async (req, res) => {
         const user = await UserRepository.getById(user_id);
 
         if (!user) {
-            return res.status(404).json(
-                responseBuilder(false, 404, "NOT_FOUND", {
-                    location: "changePasswordController",
-                    detail: "User not found",
-                })
-            );
+            return userNotFound(res, "changePasswordController");
         }
 
         if (!password || !password_confirm) {
@@ -363,11 +321,6 @@ export const changePasswordController = async (req, res) => {
             })
         );
     } catch (err) {
-        return res.status(500).json(
-            responseBuilder(false, 500, "BAD_REQUEST", {
-                location: "changePasswordController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "changePasswordController", err.message);
     }
 };

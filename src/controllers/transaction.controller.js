@@ -1,27 +1,20 @@
-import TransactionRepository from "../repositories/transaction.repository.js";
 import UserRepository from "../repositories/user.repository.js";
+import TransactionRepository from "../repositories/transaction.repository.js";
 import { responseBuilder } from "../utils/builders/responseBuilder.js";
+import { userIdNotFound, userNotFound, serverError } from "../utils/serverResponses.js";
 
 export const getAllTransactionsController = async (req, res) => {
     try {
         const { user_id } = req.params;
 
         if (!user_id) {
-            return res.status(400).json(
-                responseBuilder(false, 400, "BAD_REQUEST", {
-                    detail: "User id is needed for this operation",
-                })
-            );
+            return userIdNotFound(res, "getAllTransactionsController");
         }
 
         const user = await UserRepository.getById(user_id);
 
         if (!user) {
-            return res.status(404).json(
-                responseBuilder(false, 404, "NOT_FOUND", {
-                    detail: "User not found",
-                })
-            );
+            return userNotFound(res, "getAllTransactionsController");
         }
 
         const transactions = await TransactionRepository.getAllTransactionsByUserId(user_id);
@@ -44,12 +37,7 @@ export const getAllTransactionsController = async (req, res) => {
                 })
             );
         } else {
-            return res.status(500).json(
-                responseBuilder(false, 500, "SERVER_ERROR", {
-                    location: "getAllTransactionController",
-                    detail: err.message,
-                })
-            );
+            return serverError(res, "getAllTransactionsController", err.message);
         }
     }
 };
@@ -58,6 +46,19 @@ export const createTransactionController = async (req, res) => {
     try {
         const { user_id } = req.params;
         const { amount, source, category, description, date } = req.body;
+
+        if (!user_id) {
+            return userIdNotFound(res, "createTransactionController");
+        }
+
+        if (!amount || !source || !category || !description || !date) {
+            return res.status(400).json(
+                responseBuilder(false, 400, "BAD_REQUEST", {
+                    location: "createTransactionController",
+                    detail: "Transaction data is required",
+                })
+            );
+        }
 
         const transaction = await TransactionRepository.saveTransaction({
             user_id,
@@ -74,11 +75,6 @@ export const createTransactionController = async (req, res) => {
             })
         );
     } catch (err) {
-        res.status(500).json(
-            responseBuilder(false, 500, "SERVER_ERROR", {
-                location: "createTransactionController",
-                detail: err.message,
-            })
-        );
+        return serverError(res, "createTransactionController", err.message);
     }
 };
