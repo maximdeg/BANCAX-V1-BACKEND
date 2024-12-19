@@ -93,6 +93,7 @@ export const loginController = async (req, res) => {
             );
         }
 
+        console.log(user.password, password);
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword || !user) {
