@@ -36,8 +36,6 @@ export const createUserController = async (req, res, next) => {
             verification_token: verificationToken,
         };
 
-        const url = `${ENV.URL_FRONTEND}/in/verify/${verificationToken}`;
-
         const user = await UserRepository.saveUser(newUser);
 
         if (!user) {
@@ -48,6 +46,8 @@ export const createUserController = async (req, res, next) => {
                 })
             );
         }
+
+        const url = `${ENV.URL_FRONTEND}/in/verify/${verificationToken}`;
 
         await new Email(fullname, email, url).sendVerificationToken();
 
