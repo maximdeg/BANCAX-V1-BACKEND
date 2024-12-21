@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "https://bancax.vercel.app",
+        origin: ["https://bancax.vercel.app", 'http://localhost:5173', 'http://localhost:3000'],
         credentials: true,
     })
 );
