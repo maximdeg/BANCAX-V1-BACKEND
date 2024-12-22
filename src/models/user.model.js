@@ -76,8 +76,51 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "default.png",
     },
-    categories: [categorySchema],
-    sources: [sourceSchema],
+    categories: {
+        type: [categorySchema],
+        default: [
+            {
+                name: "General",
+                color: "#64f710",
+                is_active: true,
+            },
+            {
+                name: "Work",
+                color: "#10f784",
+                is_active: true,
+            },
+            {
+                name: "Supermarket",
+                color: "#f5880c",
+                is_active: true,
+            },
+            {
+                name: "Video Platforms",
+                color: "#f50c0c",
+                is_active: true,
+            },
+        ],
+    },
+    sources: {
+        type: [sourceSchema],
+        default: [
+            {
+                name: "Cash",
+                color: "#2a9e13",
+                is_active: true,
+            },
+            {
+                name: "Debit Card",
+                color: "#b15f30",
+                is_active: true,
+            },
+            {
+                name: "Credit Card",
+                color: "#FF0000",
+                is_active: true,
+            },
+        ],
+    },
     role: {
         type: String,
         enum: ["user", "admin"],
