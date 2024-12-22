@@ -74,7 +74,7 @@ const userSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        default: "default.png",
+        default: "https://res.cloudinary.com/djdnlogf1/image/upload/v1734903112/users/6768848c6b4d393ea2c0df6b/1734903112769.png",
     },
     categories: {
         type: [categorySchema],
@@ -95,7 +95,7 @@ const userSchema = new mongoose.Schema({
                 is_active: true,
             },
             {
-                name: "Video Platforms",
+                name: "Movie Platforms",
                 color: "#f50c0c",
                 is_active: true,
             },
