@@ -28,7 +28,7 @@ npm run dev
 
 [Cloudinary](https://cloudinary.com) para guardar y usar imagenes.
 
-[React-Router-Dom](https://reactrouter.com/en/main) es el principal enrutador.
+[EXPRESS](https://expressjs.com/) para armar las rutas y la API.
 
 El resto del codigo fue hecho a mano en Express, MongoDB y NodeJS.
 
