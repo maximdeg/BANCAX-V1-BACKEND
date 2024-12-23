@@ -1,5 +1,11 @@
 import express from "express";
-import { getAllUsersController, getUserByIdController, saveImageController, updateUserByIdController } from "../controllers/user.controller.js";
+import {
+    getAllUsersController,
+    getUserByIdController,
+    saveImageController,
+    updateUserByIdController,
+    deleteUserByIdController,
+} from "../controllers/user.controller.js";
 import { verifyApiKeyMiddleware, verifyTokenMiddleware } from "../middlewares/auth.middleware.js";
 import { get } from "mongoose";
 
@@ -12,5 +18,6 @@ userRouter.get("/", getAllUsersController);
 userRouter.get("/:user_id", getUserByIdController);
 userRouter.put("/:user_id", updateUserByIdController);
 userRouter.put("/upload-photo/:user_id", saveImageController);
+userRouter.delete("/:user_id", deleteUserByIdController);
 
 export default userRouter;

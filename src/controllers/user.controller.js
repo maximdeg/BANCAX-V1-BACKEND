@@ -169,3 +169,37 @@ export const saveImageController = async (req, res) => {
         return serverError(res, "saveImageController", err.message);
     }
 };
+
+export const deleteUserByIdController = async (req, res) => {
+    try {
+        const { user_id } = req.params;
+
+        if (!user_id) {
+            return userIdNotFound(res, "deleteUserByIdController");
+        }
+
+        const user = await UserRepository.deleteUser(user_id);
+
+        if (!user) {
+            return userNotFound(res, "deleteUserByIdController");
+        }
+
+        res.status(200).json(
+            responseBuilder(true, 200, "User deleted successfully", {
+                detail: {
+                    user: {
+                        id: user._id,
+                        fullname: user.fullname,
+                        email: user.email,
+                        photo: user.photo,
+                        categories: user.categories,
+                        sources: user.sources,
+                        role: user.role,
+                    },
+                },
+            })
+        );
+    } catch (err) {
+        return serverError(res, "deleteUserByIdController", err.message);
+    }
+};
